@@ -1,0 +1,115 @@
+-------- Query for getting all user from the Db ---------
+query getAllUsers{
+  users
+  {
+    id
+    firstName
+    lastName
+    email
+    password
+    quotes
+    {
+        by
+        name
+    }
+  }
+}
+
+-------  To get all the quotes from Db --------
+
+query getAllQuotes{
+  quotes
+  {
+    by
+    name
+  }
+
+}
+
+----- to get a specific user from Db -------
+
+query getUserById
+{
+  user(id:"1234")
+  {
+  id
+    firstName
+    lastName
+    quotes
+    {name}
+  
+  }
+}
+----- to get a specific user from Db using dynamic id -------
+
+query getUserById($userId:ID!)
+{
+  user(id:$userId)
+  {
+  id
+    firstName
+    lastName
+    quotes
+    {name}
+  
+  }
+}
+
+----- to get a specific quote from Db -------
+
+query getQuoteById
+{
+  quote(by:"123")
+  {
+  	name
+  }
+}
+
+----- to get a specific quote from Db using dynamic id -------
+
+query getQuoteById($userId:ID!)
+{
+  quote(by:$userId)
+  {
+  	name
+  }
+}
+
+
+---- create a new user into db ----
+mutation
+{
+  signUpUserDummy(firstName:"Sagar",lastName:"Rana",email:"sagar@sagar.com",password:"12345"){
+    id
+    firstName
+    lastName
+  }
+}
+
+
+
+----- mutatation for creating a new user in other approach------
+mutation createUser($userNew:UserInput!)
+{
+  signUpUserDummy(userNew:$userNew)
+  {
+    id
+    firstName
+    lastName
+    email
+    password
+    
+  }
+}
+
+varibable={"userNew": {"firstName": "jsdhksajh","lastName": "sdgahjg","email":"sadghjg","password": "sjadhk"}}
+
+
+-------- all Quotes query for home page-------
+query getAllQuotes {
+    quotes {
+      name
+      by
+      firstName
+    }
+  }
